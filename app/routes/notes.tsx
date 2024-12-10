@@ -41,7 +41,7 @@ export default function Notes() {
 }
 
 
-export function ErrorBoundary({error}){
+export function ErrorBoundary(){
     const caughtResponse = useRouteError()
 
     if (isRouteErrorResponse(caughtResponse)){
@@ -54,10 +54,11 @@ export function ErrorBoundary({error}){
         )
     }
 
+
     return (
         <main className="error">
             <h1>An error occured related to notes.</h1>
-            <p>{error}</p>
+            <p>{caughtResponse.statusText}</p>
             <p>
                 Back to <Link to="/">Back to safety</Link>
             </p>
