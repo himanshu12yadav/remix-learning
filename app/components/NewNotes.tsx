@@ -1,7 +1,6 @@
 import styles from "./NewNote.css";
-import {Form, useNavigation} from "@remix-run/react";
 import {LinksFunction} from "@remix-run/node";
-
+import {Form, useActionData, useNavigation} from "@remix-run/react";
 
 export const links:LinksFunction = ()=>[
   {
@@ -11,11 +10,13 @@ export const links:LinksFunction = ()=>[
 ]
 
 export default function NewNote():JSX.Element {
-    const navigation = useNavigation();
-    const isSubmitting = navigation.state === "submitting";
+    const data = useActionData();
+    const navigation  = useNavigation();
+    const isSubmitting = navigation.state === 'submitting';
 
     return (
         <Form method="post" id="note-form">
+            {data?.message && <p>{data?.message}</p>}
             <p>
                 <label htmlFor="title">Title</label>
                 <input type="text" id="title" name="title" required/>
@@ -25,7 +26,7 @@ export default function NewNote():JSX.Element {
                 <textarea id="content" name="content" rows={5} required/>
             </p>
             <div className="form-actions">
-                <button disabled={isSubmitting}>Add Note</button>
+                <button disabled={isSubmitting}>{isSubmitting ? 'Adding...' : 'Add Note'}</button>
             </div>
         </Form>
     )
