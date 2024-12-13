@@ -1,16 +1,15 @@
-import styles from "./NoteList.css";
+import styles from "./NoteList.css?url";
 import {Link} from "@remix-run/react";
 
 export const links = () => [
     {
             rel:"stylesheet",
             href:styles
-    }
-
-    ];
+    }];
 
 // @ts-ignore
 export default function NoteList({notes}){
+    console.log(notes);
     return (
         <ul id="note-list">
             {

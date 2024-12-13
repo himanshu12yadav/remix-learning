@@ -11,7 +11,7 @@ import type { LinksFunction } from "@remix-run/node";
 
 import MainNavigation from "~/components/NavLink";
 
-import styles from "./styles/main.css";
+import styles from "./styles/main.css?url";
 
 export const links: LinksFunction = () => [
     {
@@ -41,39 +41,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function ErrorBoundary({error}) {
+export function ErrorBoundary({error}:{error:Error}) {
 
-    const caughtResponse = useRouteError()
+    const caughtResponse: any = useRouteError()
 
     if (isRouteErrorResponse(caughtResponse)) {
         return (
             <div>
-                <h1>{error.status}{error.statusText}</h1>
                 <p>{error.message}</p>
             </div>
         )
     }
 
     return (
-        <html lang="en">
-        <head>
-            <meta charSet="utf-8"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1"/>
-            <Meta/>
-            <Links/>
-            <title>An error occured</title>
-        </head>
-        <body>
         <main className="error">
-            <h1>An error occured!</h1>
-            <p>{error}</p>
+            <h1>An error occurred!</h1>
+            <p>{caughtResponse}</p>
             <p>Back to <Link to="/">Back to safety</Link></p>
         </main>
-
-        <ScrollRestoration/>
-        <Scripts/>
-        </body>
-        </html>
     )
 
 }

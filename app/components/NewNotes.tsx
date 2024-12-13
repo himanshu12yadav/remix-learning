@@ -1,4 +1,4 @@
-import styles from "./NewNote.css";
+import styles from "./NewNotes.css?url";
 import {LinksFunction} from "@remix-run/node";
 import {Form, useActionData, useNavigation} from "@remix-run/react";
 
