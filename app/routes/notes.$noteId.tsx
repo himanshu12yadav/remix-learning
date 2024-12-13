@@ -2,10 +2,8 @@ import {Link} from '@remix-run/react';
 
 import styles from '../styles/note-details.css';
 
-
-
 export default function NoteDetailsPage(){
-    console.log("Note Detail Page");
+
     return (
         <main id="note-details">
             <header>
