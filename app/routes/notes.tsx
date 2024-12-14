@@ -4,7 +4,6 @@ import {getStoredNotes, storeNotes} from "~/data/notes";
 import NoteList, {links as noteListLinks} from "~/components/NoteList";
 import {Link, useLoaderData, useRouteError} from "@remix-run/react";
 import {isRouteErrorResponse} from "@remix-run/router/utils";
-import {v4 as uuidv4} from "uuid";
 
 export const loader = async ()=>{
     const notes = await getStoredNotes();
@@ -24,7 +23,7 @@ export const action = async({request})=>{
         return {message: "Invalid title"}
     }
     const existingNotes = await getStoredNotes();
-    noteData.id = `note-${uuidv4()}`;
+    noteData.id = new Date().toISOString();
     const updatedNotes = existingNotes.concat(noteData);
     await storeNotes(updatedNotes);
     return redirect('/notes');
